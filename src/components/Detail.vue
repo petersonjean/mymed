@@ -18,19 +18,17 @@
   </template>
   
   <script>
+  import { ref, computed } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { meds } from '@/store/meds';
+  
   export default {
     name: 'DetailPage',
-    data() {
-      return {
-        activeTab: 'dosage',
-        med: {
-          name: 'Antibiotic',
-          photo: require('@/assets/Amoxicillin.jpg'),
-          doctorPhoto: 'https://place-hold.it/96x96/007aff/fff?text=Dr',
-          dosageText: 'Take 1 pill with food.',
-          sideEffects: ['Nausea', 'Headache'],
-        }
-      };
+    setup() {
+      const route = useRoute();
+      const activeTab = ref('dosage');
+      const med = computed(() => meds.find(m => m.id === route.params.id) || meds[0]);
+      return { activeTab, med };
     }
   };
   </script>

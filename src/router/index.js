@@ -6,8 +6,8 @@ import Tracking from '../components/Tracking.vue';
 
 const routes = [
   { path: '/', name: 'HomePage', component: Home },
-  { path: '/scan', name: 'ScanPage', component: Scan },
-  { path: '/detail', name: 'DetailPage', component: Detail },
+  { path: '/scan/:id', name: 'ScanPage', component: Scan, props: true }, //id of selected today's med
+  { path: '/detail/:id', name: 'DetailPage', component: Detail, props: true }, //id from scan qrcode/rfid
   { path: '/tracking', name: 'TrackingPage', component: Tracking },
 ];
 
