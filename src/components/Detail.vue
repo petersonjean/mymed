@@ -44,10 +44,8 @@
         showVideo.value = true;
         nextTick(() => {
           const video = document.querySelector('#med-video');
-          if (video) video.play().catch(() => {
-      console.log("error for video");
-      
-    });;
+          if (video) video.play().catch(() => {  
+    });
           console.log("video", video);
           
         });
