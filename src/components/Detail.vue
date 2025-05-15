@@ -4,15 +4,15 @@
       <img :src="med.photo" class="med-photo" alt="Medication">
       <img :src="med.doctorPhoto" class="ai-avatar" alt="AI Doctor avatar">
       <div v-if="med.doctorVideo">
-      <button @click="showVideo = true" class="play-button">▶️ Play Instruction Video</button>
-      <div v-if="showVideo">
-        <video ref="videoPlayer" width="100%" controls @play="onPlay" style="display:block; margin:1rem auto;">
+      <button @click="onPlay" class="play-button">▶️ Play Instruction Video</button>
+      <div  :class="{'video-hidden': !showVideo}">
+        <video id="med-video" ref="videoPlayer" width="100%" controls  style="display:block; margin:1rem auto;">
           <source :src="med.doctorVideo" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
     </div>
-    <p v-else class="no-video">No instruction video available.</p>
+    <p v-else class="no-video"  >No instruction video available.</p>
 
       <div class="tab-row" role="tablist">
         <button @click="activeTab='dosage'" :class="{ active: activeTab==='dosage' }" role="tab">Dosage</button>
@@ -29,7 +29,7 @@
   </template>
   
   <script>
-  import { ref, computed } from 'vue';
+  import { ref, computed,nextTick } from 'vue';
   import { useRoute } from 'vue-router';
   import { meds } from '@/store/meds';
   
@@ -40,8 +40,19 @@
       const activeTab = ref('dosage');
       const showVideo = ref(false);
       const med = computed(() => meds.find(m => m.id === route.params.id) || meds[0]);
-       
-      return { activeTab, med ,showVideo};
+      const onPlay = ()=>{
+        showVideo.value = true;
+        nextTick(() => {
+          const video = document.querySelector('#med-video');
+          if (video) video.play().catch(() => {
+      console.log("error for video");
+      
+    });;
+          console.log("video", video);
+          
+        });
+      }
+      return { activeTab, med ,showVideo,onPlay};
     }
   };
   </script>
@@ -56,5 +67,9 @@
 
 width:100%;border-radius:var(--radius-md);margin-top:1rem;
 
+}
+
+.video-hidden{
+  display: none;
 }
   </style>
