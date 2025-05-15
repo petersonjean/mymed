@@ -40,9 +40,7 @@
       const activeTab = ref('dosage');
       const showVideo = ref(false);
       const med = computed(() => meds.find(m => m.id === route.params.id) || meds[0]);
-      const playVideo =() =>{
-
-      }
+       
       return { activeTab, med ,showVideo};
     }
   };
