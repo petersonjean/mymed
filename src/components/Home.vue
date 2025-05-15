@@ -7,6 +7,8 @@
     </article>
       <button @click="$router.push('/tracking')">History</button>
       <!-- <button @click="$router.push('/scan')" style="margin-top:.75rem;">Scan Label</button> -->
+      <div><h5>For demo:</h5> Print a qrcode for this link where medicaiton ID = 1 <a href=""   rel="noopener noreferrer"><span>https://mymed-puce.vercel.app/med/1</span> </a></div>
+      
     </section>
   </template>
   
